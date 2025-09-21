@@ -38,26 +38,31 @@ export default function Index() {
   return (
     <div className="min-h-screen bg-background">
       {/* Header */}
-      <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+      <header className="sticky top-0 z-50 w-full border-b glass-effect bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 shadow-lg">
         <div className="container mx-auto px-4 h-16 flex items-center justify-between">
           <div className="flex items-center space-x-2">
-            <Icon name="Building2" className="h-8 w-8 text-primary" />
-            <span className="text-2xl font-bold text-primary">VALTRI</span>
+            <div className="p-1 bg-primary/10 rounded-lg">
+              <Icon name="Building2" className="h-8 w-8 text-primary" />
+            </div>
+            <span className="text-2xl font-bold gradient-text">VALTRI</span>
           </div>
           <nav className="hidden md:flex items-center space-x-6">
             {navigationItems.map((item) => (
               <button
                 key={item.id}
                 onClick={() => setActiveSection(item.id)}
-                className={`text-sm font-medium transition-colors hover:text-primary ${
+                className={`text-sm font-medium transition-all duration-300 hover:text-primary hover:scale-105 relative ${
                   activeSection === item.id ? 'text-primary' : 'text-muted-foreground'
                 }`}
               >
                 {item.title}
+                {activeSection === item.id && (
+                  <div className="absolute -bottom-1 left-0 right-0 h-0.5 bg-primary rounded-full"></div>
+                )}
               </button>
             ))}
           </nav>
-          <Button variant="outline" size="sm">
+          <Button variant="outline" size="sm" className="glow-effect border-primary/20 hover:border-primary">
             <Icon name="Phone" className="h-4 w-4 mr-2" />
             +7 (495) 123-45-67
           </Button>
@@ -69,15 +74,17 @@ export default function Index() {
         {activeSection === 'main' && (
           <>
             {/* Hero Section */}
-            <section className="relative hero-gradient text-white py-24 lg:py-32">
+            <section className="relative hero-gradient text-white py-24 lg:py-32 overflow-hidden">
               <div className="container mx-auto px-4">
                 <div className="grid lg:grid-cols-2 gap-12 items-center">
                   <div className="space-y-6">
-                    <Badge variant="secondary" className="bg-white/20 text-white border-white/30">
+                    <Badge variant="secondary" className="bg-white/20 text-white border-white/30 glass-effect">
                       Премиум-класс в центре Москвы
                     </Badge>
                     <h1 className="text-4xl lg:text-6xl font-bold leading-tight">
-                      VALTRI
+                      <span className="gradient-text bg-gradient-to-r from-white to-blue-100 bg-clip-text text-transparent">
+                        VALTRI
+                      </span>
                       <span className="block text-2xl lg:text-3xl font-normal mt-2 opacity-90">
                         Новый стандарт жизни
                       </span>
@@ -87,47 +94,49 @@ export default function Index() {
                       и безупречным сервисом в сердце столицы
                     </p>
                     <div className="flex flex-col sm:flex-row gap-4">
-                      <Button size="lg" className="bg-white text-primary hover:bg-white/90">
+                      <Button size="lg" className="bg-white text-primary hover:bg-white/90 glow-effect shadow-xl">
                         <Icon name="Calendar" className="h-5 w-5 mr-2" />
                         Записаться на просмотр
                       </Button>
-                      <Button size="lg" variant="outline" className="border-white text-white hover:bg-white/10">
+                      <Button size="lg" variant="outline" className="border-white text-white hover:bg-white/10 glass-effect">
                         <Icon name="Download" className="h-5 w-5 mr-2" />
                         Скачать презентацию
                       </Button>
                     </div>
                   </div>
-                  <div className="relative">
+                  <div className="relative floating-animation">
+                    <div className="absolute -inset-4 bg-gradient-to-r from-blue-500/20 to-purple-500/20 rounded-2xl blur-xl"></div>
                     <img 
                       src="/img/658b3b4e-3bd4-4cdb-990c-d1919b6d0a6a.jpg" 
                       alt="VALTRI Building" 
-                      className="rounded-lg shadow-2xl w-full h-[500px] object-cover"
+                      className="relative rounded-2xl shadow-2xl w-full h-[500px] object-cover glow-effect"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent rounded-lg"></div>
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-blue-500/10 rounded-2xl"></div>
                   </div>
                 </div>
               </div>
             </section>
 
             {/* Quick Stats */}
-            <section className="py-16 bg-muted/50">
-              <div className="container mx-auto px-4">
+            <section className="py-16 bg-gradient-to-r from-muted/30 to-primary/5 relative overflow-hidden">
+              <div className="absolute inset-0 bg-grid-pattern opacity-5"></div>
+              <div className="container mx-auto px-4 relative z-10">
                 <div className="grid grid-cols-2 lg:grid-cols-4 gap-8 text-center">
-                  <div className="space-y-2">
-                    <h3 className="text-3xl font-bold text-primary">24</h3>
-                    <p className="text-muted-foreground">этажа</p>
+                  <div className="stats-counter rounded-2xl p-6 animate-scale-in">
+                    <h3 className="text-3xl font-bold gradient-text mb-2">24</h3>
+                    <p className="text-muted-foreground font-medium">этажа</p>
                   </div>
-                  <div className="space-y-2">
-                    <h3 className="text-3xl font-bold text-primary">106</h3>
-                    <p className="text-muted-foreground">квартир</p>
+                  <div className="stats-counter rounded-2xl p-6 animate-scale-in" style={{animationDelay: '0.1s'}}>
+                    <h3 className="text-3xl font-bold gradient-text mb-2">106</h3>
+                    <p className="text-muted-foreground font-medium">квартир</p>
                   </div>
-                  <div className="space-y-2">
-                    <h3 className="text-3xl font-bold text-primary">2025</h3>
-                    <p className="text-muted-foreground">год сдачи</p>
+                  <div className="stats-counter rounded-2xl p-6 animate-scale-in" style={{animationDelay: '0.2s'}}>
+                    <h3 className="text-3xl font-bold gradient-text mb-2">2025</h3>
+                    <p className="text-muted-foreground font-medium">год сдачи</p>
                   </div>
-                  <div className="space-y-2">
-                    <h3 className="text-3xl font-bold text-primary">от 12.5М</h3>
-                    <p className="text-muted-foreground">₽ стоимость</p>
+                  <div className="stats-counter rounded-2xl p-6 animate-scale-in" style={{animationDelay: '0.3s'}}>
+                    <h3 className="text-3xl font-bold gradient-text mb-2">от 12.5М</h3>
+                    <p className="text-muted-foreground font-medium">₽ стоимость</p>
                   </div>
                 </div>
               </div>
@@ -145,19 +154,22 @@ export default function Index() {
                 </div>
                 <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
                   {apartmentTypes.map((apt, index) => (
-                    <Card key={index} className="hover:shadow-lg transition-shadow">
-                      <CardHeader>
-                        <CardTitle className="text-lg">{apt.type}</CardTitle>
-                        <CardDescription>{apt.area} м²</CardDescription>
+                    <Card key={index} className="card-hover glow-effect border-0 shadow-lg bg-gradient-to-br from-white to-gray-50/50">
+                      <CardHeader className="relative">
+                        <div className="absolute top-4 right-4 w-8 h-8 bg-primary/10 rounded-full flex items-center justify-center">
+                          <Icon name="Home" className="h-4 w-4 text-primary" />
+                        </div>
+                        <CardTitle className="text-lg gradient-text">{apt.type}</CardTitle>
+                        <CardDescription className="text-muted-foreground font-medium">{apt.area} м²</CardDescription>
                       </CardHeader>
                       <CardContent className="space-y-4">
-                        <div className="text-2xl font-bold text-primary">
+                        <div className="text-2xl font-bold gradient-text">
                           от {apt.price} ₽
                         </div>
-                        <div className="text-sm text-muted-foreground">
+                        <div className="text-sm text-muted-foreground bg-muted/50 rounded-lg p-2 text-center">
                           Доступно: {apt.count} квартир
                         </div>
-                        <Button className="w-full" onClick={() => setActiveSection('offices')}>
+                        <Button className="w-full glow-effect shadow-md" onClick={() => setActiveSection('offices')}>
                           Выбрать квартиру
                         </Button>
                       </CardContent>
